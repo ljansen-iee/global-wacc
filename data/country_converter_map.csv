@@ -1,0 +1,193 @@
+country_name,iso3_code,needs_review
+Abu Dhabi,,True
+Albania,ALB,False
+Algeria,DZA,False
+Andorra  (Principality of),AND,False
+Angola,AGO,False
+Anguilla,AIA,False
+Antigua &  Barbuda,ATG,False
+Argentina,ARG,False
+Armenia,ARM,False
+Aruba,ABW,False
+Australia,AUS,False
+Austria,AUT,False
+Azerbaijan,AZE,False
+Bahamas,BHS,False
+Bahrain,BHR,False
+Bangladesh,BGD,False
+Barbados,BRB,False
+Belarus,BLR,False
+Belgium,BEL,False
+Belize,BLZ,False
+Benin,BEN,False
+Bermuda,BMU,False
+Bolivia,BOL,False
+Bosnia and  Herzegovina,BIH,False
+Botswana,BWA,False
+Brazil,BRA,False
+British Virgin  Islands,VGB,False
+Brunei,BRN,False
+Bulgaria,BGR,False
+Burkina Faso,BFA,False
+Cambodia,KHM,False
+Cameroon,CMR,False
+Canada,CAN,False
+Cape Verde,CPV,False
+Cayman Islands,CYM,False
+Channel  Islands,,True
+Chile,CHL,False
+China,CHN,False
+Colombia,COL,False
+Congo  (Democratic Republic,COD,False
+Congo  (Republic of),,True
+Cook Islands,COK,False
+Costa Rica,CRI,False
+Croatia,HRV,False
+Cuba,CUB,False
+Curaçao,CUW,False
+Cyprus,CYP,False
+Czech Republic,CZE,False
+Denmark,DNK,False
+Dominican  Republic,DOM,False
+Ecuador,ECU,False
+Egypt,EGY,False
+El Salvador,SLV,False
+Estonia,EST,False
+Ethiopia,ETH,False
+Falkland  Islands,FLK,False
+Fiji,FJI,False
+Finland,FIN,False
+France,FRA,False
+French Guiana,GUF,False
+Gabon,GAB,False
+Gambia,GMB,False
+Georgia,GEO,False
+Germany,DEU,False
+Ghana,GHA,False
+Gibraltar,GIB,False
+Greece,GRC,False
+Greenland,GRL,False
+Guatemala,GTM,False
+Guernsey  (States of),GGY,False
+Guinea,GIN,False
+Guinea-Bissau,GNB,False
+Guyana,GUY,False
+Haiti,HTI,False
+Honduras,HND,False
+Hong Kong,HKG,False
+Hungary,HUN,False
+Iceland,ISL,False
+India,IND,False
+Indonesia,IDN,False
+Iran,IRN,False
+Iraq,IRQ,False
+Ireland,IRL,False
+Isle of Man,IMN,False
+Israel,ISR,False
+Italy,ITA,False
+Ivory Coast,CIV,False
+Jamaica,JAM,False
+Japan,JPN,False
+Jersey (States  of),JEY,False
+Jordan,JOR,False
+Kazakhstan,KAZ,False
+Kenya,KEN,False
+"Korea, D.P.R.","['PRK', 'KOR']",False
+Kuwait,KWT,False
+Kyrgyzstan,KGZ,False
+Laos,LAO,False
+Latvia,LVA,False
+Lebanon,LBN,False
+Liberia,LBR,False
+Libya,LBY,False
+Liechtenstein,LIE,False
+Lithuania,LTU,False
+Luxembourg,LUX,False
+Macau,MAC,False
+Macedonia,MKD,False
+Madagascar,MDG,False
+Malawi,MWI,False
+Malaysia,MYS,False
+Maldives,MDV,False
+Mali,MLI,False
+Malta,MLT,False
+Martinique,MTQ,False
+Mauritius,MUS,False
+Mexico,MEX,False
+Moldova,MDA,False
+Monaco,MCO,False
+Mongolia,MNG,False
+Montenegro,MNE,False
+Montserrat,MSR,False
+Morocco,MAR,False
+Mozambique,MOZ,False
+Myanmar,MMR,False
+Namibia,NAM,False
+Nepal,NPL,False
+Netherlands,NLD,False
+Netherlands  Antilles,,True
+New Zealand,NZL,False
+Nicaragua,NIC,False
+Niger,NER,False
+Nigeria,NGA,False
+Norway,NOR,False
+Oman,OMN,False
+Pakistan,PAK,False
+Palestinian  Authority,PSE,False
+Panama,PAN,False
+Papua New  Guinea,PNG,False
+Paraguay,PRY,False
+Peru,PER,False
+Philippines,PHL,False
+Poland,POL,False
+Portugal,PRT,False
+Qatar,QAT,False
+Ras Al Khaimah  (Emirate of),,True
+Reunion,REU,False
+Romania,ROU,False
+Russia,RUS,False
+Rwanda,RWA,False
+Saint Lucia,LCA,False
+Saudi Arabia,SAU,False
+Senegal,SEN,False
+Serbia,SRB,False
+Sharjah,,True
+Sierra Leone,SLE,False
+Singapore,SGP,False
+Slovakia,SVK,False
+Slovenia,SVN,False
+Solomon  Islands,SLB,False
+Somalia,SOM,False
+South Africa,ZAF,False
+South Korea,KOR,False
+Spain,ESP,False
+Sri Lanka,LKA,False
+St. Maarten,SXM,False
+St. Vincent  & the Grenadines,VCT,False
+Sudan,SDN,False
+Suriname,SUR,False
+Swaziland,SWZ,False
+Sweden,SWE,False
+Switzerland,CHE,False
+Syria,SYR,False
+Taiwan,TWN,False
+Tajikistan,TJK,False
+Tanzania,TZA,False
+Thailand,THA,False
+Togo,TGO,False
+Trinidad  &' Tobago,TTO,False
+Tunisia,TUN,False
+Turkey,TUR,False
+Turks &  Caicos Islands,TCA,False
+Uganda,UGA,False
+Ukraine,UKR,False
+United Arab  Emirates,ARE,False
+United Kingdom,GBR,False
+United States,USA,False
+Uruguay,URY,False
+Uzbekistan,UZB,False
+Venezuela,VEN,False
+Vietnam,VNM,False
+Yemen,YEM,False
+Zambia,ZMB,False
+Zimbabwe,ZWE,False
