@@ -1113,17 +1113,24 @@ with tab4:
 
     st.subheader("Sources")
     st.markdown("""
-    - Damodaran, A. (2026). *Country Default Spreads and Risk Premiums*.
+    **WACC methodology:**
+    - Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
+    - Reul, J., Mpinga, L., Graul, H., et al. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation.
+      [Link](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
+
+    **Country risk & cost of equity (CAPM):**
+    - Damodaran, A. (2023). *Country Risk: Determinants, Measures and Implications — The 2023 Edition.*
+      [DOI](https://doi.org/10.2139/ssrn.4509578)
+    - Damodaran, A. (2023). *Equity Risk Premiums (ERP): Determinants, Estimation and Implications — The 2023 Edition.*
+      [DOI](https://doi.org/10.2139/ssrn.4398884)
+
+    **Country-specific data (CRP, tax rate, beta):**
+    - Damodaran, A. (2026). *Country Default Spreads and Risk Premiums.*
       NYU Stern School of Business.
       [Link](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html)
-    - Damodaran, A. (2026). *Betas by Sector (US)*.
+    - Damodaran, A. (2026). *Betas by Sector (US).*
       NYU Stern School of Business.
       [Link](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html)
-    - H2Global, Fraunhofer IEE, Strathmore University (2025).
-      *Kenya's Business Case for Green Hydrogen*.
-      [Link](https://h2-global.org/wp-content/uploads/2025/06/H2Global-White-paper-Kenyas-Business-Case-v11.pdf)
-    - Egli, F. et al. (2025). *Renewable energy investment risks across countries*.
-      Nature Energy. [DOI](https://doi.org/10.1038/s41560-025-01768-y)
     """)
 
     st.subheader("License")
@@ -1145,8 +1152,12 @@ def create_csv_with_metadata(wacc_data, params):
     metadata_lines = [
         "# WACC Calculator for Global PtX Projects - Results",
         "# Author: Lukas Jansen",
-        "# Sources: Aswath Damodaran. Fincancial Data. received from https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html and https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html",
-        "# Sources: H2Global. 2025. https://h2-global.org/wp-content/uploads/2025/06/H2Global-White-paper-Kenyas-Business-Case-v11.pdf. Florian Egli et al. 2025. https://doi.org/10.1038/s41560-025-01768-y",
+        "# Sources: Aswath Damodaran. Country Default Spreads and Risk Premiums. https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html",
+        "# Sources: Aswath Damodaran. Betas by Sector (US). https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html",
+        "# Sources: Aswath Damodaran (2023). Country Risk: Determinants, Measures and Implications. https://doi.org/10.2139/ssrn.4509578",
+        "# Sources: Aswath Damodaran (2023). Equity Risk Premiums (ERP). https://doi.org/10.2139/ssrn.4398884",
+        "# Sources: Brealey, Myers & Allen (2020). Principles of Corporate Finance (13th ed.). McGraw-Hill Education.",
+        "# Sources: Reul et al. (2025). Renewable Ammonia: Kenya's Business Case. H2Global Foundation. https://h2-global.org/library/renewable-ammonia-kenyas-business-case/",
         "# License: CC BY 4.0",
         "# Contact: lukas.jansen@iee.fraunhofer.de",
         f"# Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
@@ -1208,11 +1219,14 @@ with col1:
     key='download-wacc-csv'
     )
 with col2:
-    st.caption("Lukas Jansen, 2025, Fraunhofer IEE.")
-    st.caption("Sources: \n"
-    "Aswath Damodaran, [Country Risk Premiums](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html) and [Betas](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html);\n"
-    "H2Global, Fraunhofer IEE, Strathmore University, 2025, [H2Global Report](https://h2-global.org/wp-content/uploads/2025/06/H2Global-White-paper-Kenyas-Business-Case-v11.pdf);\n"
-    "Florian Egli et al., 2025, https://doi.org/10.1038/s41560-025-01768-y")
+    st.caption("Lukas Jansen, 2025, Fraunhofer IEE, https://github.com/ljansen-iee/global-wacc.")
+    st.caption("Sources: "
+    "Damodaran (2026), [Country Risk Premiums](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html) "
+    "& [Betas by Sector](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html); "
+    "Damodaran (2023), [Country Risk](https://doi.org/10.2139/ssrn.4509578) "
+    "& [ERP](https://doi.org/10.2139/ssrn.4398884); "
+    "Brealey, Myers & Allen (2020), Principles of Corporate Finance; "
+    "Reul et al. (2025), [Renewable Ammonia: Kenya's Business Case](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)")
 with col3:
     st.markdown("[Imprint](https://www.iee.fraunhofer.de/en/publishing-notes.html)")
     st.markdown("[Data Protection](https://www.iee.fraunhofer.de/en/data_protection.html)")
