@@ -1,0 +1,20 @@
+# Requirements for app_country_wacc.py
+# Interactive WACC Calculator for Global PtX Projects
+
+# Core web framework
+streamlit==1.46.1
+
+# Data manipulation and analysis
+pandas==2.3.0
+numpy==1.26.4
+
+# Interactive plotting and visualization
+plotly==6.1.2
+
+# Country data utilities
+country-converter==0.7.4
+
+# Optional: If you need to read Excel files in the future
+# openpyxl>=3.0.0
+
+# Note: pathlib is part of Python standard library (3.4+), no installation needed

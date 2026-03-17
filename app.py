@@ -1118,13 +1118,13 @@ with tab4:
     - Reul, J., Mpinga, L., Graul, H., et al. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation.
       [Link](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 
-    **Country risk & cost of equity (CAPM):**
+    **Country risk & cost of equity (CAPM) literature:**
     - Damodaran, A. (2023). *Country Risk: Determinants, Measures and Implications — The 2023 Edition.*
       [DOI](https://doi.org/10.2139/ssrn.4509578)
     - Damodaran, A. (2023). *Equity Risk Premiums (ERP): Determinants, Estimation and Implications — The 2023 Edition.*
       [DOI](https://doi.org/10.2139/ssrn.4398884)
 
-    **Country-specific data (CRP, tax rate, beta):**
+    **Country-specific data download (CRP, tax rate, beta):**
     - Damodaran, A. (2026). *Country Default Spreads and Risk Premiums.*
       NYU Stern School of Business.
       [Link](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html)
