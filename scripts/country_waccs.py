@@ -455,7 +455,7 @@ if __name__ == "__main__":
     # UK Gilt: ~4.0-4.3%
     # Japanese JGB: ~0.8-1.0%
     # EU average: ~2.5-3.5%
-    BETA_UNLEVERAGED = 1.06 # source https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html --> Industry_Name: Green & Renewable Energy
+    BETA_UNLEVERAGED = 1.1 # source https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html --> Industry_Name: Green & Renewable Energy
     ERP = 0.10 - R_FREE # based on nominal long-term average return of stock market
 
     # CRP = 0.0951 # source https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html
@@ -498,47 +498,51 @@ if __name__ == "__main__":
     # Show country converter map information
     show_country_map_info(output_path)
 
+    # Add Mauritania (MRT) using average values from the other ct_list countries
+    # Note, that this is a very rough estimate and should ideally be replaced with actual data for Mauritania when available.
+    ct_ref_list_for_mrt = ['EGY','KEN','NAM']
+    if 'MRT' not in wacc_per_country['country_code'].values:
+        mrt_avg = wacc_per_country[wacc_per_country['country_code'].isin(ct_ref_list_for_mrt)].mean(numeric_only=True)
+        mrt_row = mrt_avg.to_dict()
+        mrt_row['country_code'] = 'MRT'
+        mrt_row['country_name'] = 'Mauritania'
+        wacc_per_country = pd.concat([wacc_per_country, pd.DataFrame([mrt_row])], ignore_index=True)
+        print(f"Added Mauritania (MRT) using average values from {ct_ref_list_for_mrt}")
+    else:
+        print("MRT already present in wacc_per_country")
+
     # Save results
     wacc_per_country.to_csv(output_path / "wacc_per_country_crp.csv", index=False)
     print(f"\nSaved WACC results to {output_path / 'wacc_per_country_crp.csv'}")
 
     #query("country_code in ['DEU','EGY','KEN','MAR','NAM','ZAF','TUN']").round(3)\
 
-    print(country_data.query("country_iso3 in ['DEU','EGY','KEN','MAR','NAM','ZAF','TUN']")) #Egypt, Kenya, Morocco, Namibia, South Africa and Tunisia ['CHL','ZAF','EGY','MAR','KEN','DEU']
+    # print(country_data.query("country_iso3 in ['DEU','EGY','KEN','MAR','NAM','ZAF','TUN']")) 
 
-    ct_list = ['EGY','NAM','MAR','ZAF','KEN','ETH','COD','TZA','GHA','TUN','NGA','DZA','MRT']
+    # AGHA: Egypt, Kenya, Mauretania, Morocco, Namibia, South Africa
 
-    # Add Mauritania (MRT) using average values from the other ct_list countries
-    # Note, that this is a very rough estimate and should ideally be replaced with actual data for Mauritania when available.
-    ct_list_excl_mrt = [c for c in ct_list if c != 'MRT']
-    if 'MRT' not in wacc_per_country['country_code'].values:
-        mrt_avg = wacc_per_country[wacc_per_country['country_code'].isin(ct_list_excl_mrt)].mean(numeric_only=True)
-        mrt_row = mrt_avg.to_dict()
-        mrt_row['country_code'] = 'MRT'
-        mrt_row['country_name'] = 'Mauritania'
-        wacc_per_country = pd.concat([wacc_per_country, pd.DataFrame([mrt_row])], ignore_index=True)
-        print("Added Mauritania (MRT) using average values from ct_list countries")
-    else:
-        print("MRT already present in wacc_per_country")
 
     # Display summary
     print("\nWACC Summary:")
 
+    ct_list = ['EGY','NAM','MAR','ZAF','KEN','ETH','COD','TZA','GHA','TUN','NGA','DZA','MRT', 'OMN','SAU']
+    
+    #['EGY','KEN','MAR','NAM','ZAF','TUN']
 
     # print(wacc_per_country.query(f"country_code in {ct_list}")[["country_name", "country_risk_premium", "wacc", "wacc_real"]].style.format({"country_risk_premium": "{:.2%}", "wacc": "{:.2%}", "wacc_real": "{:.2%}"}).hide(axis="index").to_latex().replace("%", "\\%"))
 
 
     print(wacc_per_country.query(
-        f"country_code in {ct_list}")[["country_name", "country_code", "wacc_real"]].round(4)
+        f"country_code in {ct_list}")[["country_name", "country_code", "wacc_real", "wacc"]].round(4)
     )
 
 
 
 
     print(wacc_per_country.query(
-        f"country_code in {ct_list}" #['EGY','NAM','MAR','ZAF','KEN','ETH','COD','TZA','GHA','TUN','NGA','DZA','MRT']
+        f"country_code in {ct_list}" 
         )[["wacc_real"]].mean())
-# ['EGY','KEN','MAR','NAM','ZAF','TUN']
+
 
 
     # cost_of_equity = 0.045 + 2.05*1.058 * 0.065 + 0.0951

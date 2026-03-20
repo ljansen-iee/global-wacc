@@ -1,7 +1,7 @@
 # Global WACC Calculator for Green PtX and Energy System Modelling
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit)](https://global-wacc.streamlit.app)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit)](https://websites.fraunhofer.de/global-wacc/)
 
 An interactive web application that calculates country-specific **Weighted Average Cost of Capital (WACC)** values for green Power-to-X (PtX) projects and energy system modelling. Country risk premiums and beta factors are sourced live from Aswath Damodaran's publicly available datasets.
 
@@ -34,7 +34,7 @@ Default parameters (adjustable via the sidebar):
 | Parameter | Default |
 | --------- | ------- |
 | Risk-free rate $r_f$ | 3.5 % |
-| Unleveraged beta $\beta_U$ (Green & Renewable Energy) | 1.06 |
+| Unleveraged beta $\beta_U$ (Green & Renewable Energy) | 1.1 |
 | Equity risk premium $ERP$ | 6.5 % |
 | SWAP rate | 3.0 % |
 | Debt spread | 2.0 % |
@@ -79,14 +79,14 @@ Set `SKIP_DOWNLOAD = False` in `scripts/country_waccs.py`, or set `RECREATE_COUN
 
 ---
 
-## Data Sources
+## Literature and Data Sources
 
+- Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
+- Reul, J.; Mpinga, L.; Graul, H.; Häckner, B.; Fetköter, J.; Zink, C.; Nafula, M.; Kosgei, D.; Banda, S. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation. [H2Global library](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 - Damodaran, A. (2026). *Country Default Spreads and Risk Premiums.* NYU Stern. [ctryprem.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html)
 - Damodaran, A. (2026). *Betas by Sector (US).* NYU Stern. [Betas.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html)
 - Damodaran, A. (2023). *Country Risk: Determinants, Measures and Implications.* [DOI 10.2139/ssrn.4509578](https://doi.org/10.2139/ssrn.4509578)
 - Damodaran, A. (2023). *Equity Risk Premiums (ERP).* [DOI 10.2139/ssrn.4398884](https://doi.org/10.2139/ssrn.4398884)
-- Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
-- Reul, J.; Mpinga, L.; Graul, H.; Häckner, B.; Fetköter, J.; Zink, C.; Nafula, M.; Kosgei, D.; Banda, S. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation. [H2Global library](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 
 Full BibTeX references are available in [references.bib](references.bib).
 
@@ -96,6 +96,6 @@ Full BibTeX references are available in [references.bib](references.bib).
 
 This project code is licensed under the [MIT License](LICENSE).
 Results are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Different licenses and terms of use apply to the input datasets. By downloading and using the data provided, the user of the tool agrees to the licenses specified by the original sources (see above).
 
 **Author:** Lukas Jansen, Fraunhofer IEE — [lukas.jansen@iee.fraunhofer.de](mailto:lukas.jansen@iee.fraunhofer.de)
-
