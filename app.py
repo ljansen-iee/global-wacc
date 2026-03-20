@@ -204,7 +204,16 @@ def load_and_calculate_wacc(skip_download=True):
             
             country_data['un_region'] = country_data.index.map(region_mapping)
             country_data['un_region'] = country_data['un_region'].fillna('Other')
-        
+
+        # Add Mauritania (MRT) using average values from reference countries
+        ct_ref_list_for_mrt = ['EGY', 'KEN', 'NAM']
+        if 'MRT' not in country_data.index:
+            mrt_avg = country_data[country_data.index.isin(ct_ref_list_for_mrt)].mean(numeric_only=True)
+            mrt_row = mrt_avg.to_dict()
+            mrt_row['country_name'] = 'Mauritania'
+            mrt_row['un_region'] = 'Sub-Saharan Africa'
+            country_data.loc['MRT'] = mrt_row
+
         return country_data, True
         
     except Exception as e:
@@ -246,7 +255,19 @@ def calculate_wacc_with_params(country_data, params):
         if 'un_region' in country_data.columns:
             region_map = country_data['un_region'].to_dict()
             wacc_results['un_region'] = wacc_results['country_code'].map(region_map)
-        
+
+        # Add Mauritania (MRT) using average values from reference countries
+        # Note: rough estimate, replace with actual data when available
+        ct_ref_list_for_mrt = ['EGY', 'KEN', 'NAM']
+        if 'MRT' not in wacc_results['country_code'].values:
+            mrt_avg = wacc_results[wacc_results['country_code'].isin(ct_ref_list_for_mrt)].mean(numeric_only=True)
+            mrt_row = mrt_avg.to_dict()
+            mrt_row['country_code'] = 'MRT'
+            mrt_row['country_name'] = 'Mauritania'
+            if 'un_region' in wacc_results.columns:
+                mrt_row['un_region'] = 'Sub-Saharan Africa'
+            wacc_results = pd.concat([wacc_results, pd.DataFrame([mrt_row])], ignore_index=True)
+
         return wacc_results
         
     except Exception as e:
@@ -336,7 +357,7 @@ with st.sidebar:
     # Financial parameters
     st.subheader("Financial Parameters")
     r_free = st.slider("Risk-Free Rate (%)", 1.0, 6.0, 3.5, 0.1, help="Government bond yield") / 100
-    beta = st.slider("Beta Factor (Unleveraged)", 0.5, 2.0, 1.13, 0.01, help="Unleveraged industry beta - will be relevered for each country based on tax and debt/equity ratio")
+    beta = st.slider("Beta Factor (Unleveraged)", 0.5, 2.0, 1.1, 0.01, help="Unleveraged industry beta - will be relevered for each country based on tax and debt/equity ratio")
     erp = st.slider("Equity Risk Premium (%)", 3.0, 12.0, 6.5, 0.1, help="Market return premium over risk-free rate") / 100
     
     # New option for country-specific ERP
@@ -644,7 +665,19 @@ with tab2:
             labels={'wacc_real': 'Real WACC (%)'}
         )
         
-        fig_map_real.update_layout(height=600)
+        fig_map_real.update_geos(
+            domain=dict(x=[0, 0.88], y=[0, 1])
+        )
+        fig_map_real.update_layout(
+            height=600,
+            margin=dict(l=0, r=0, t=30, b=0),
+            coloraxis_colorbar=dict(
+                x=0.89,
+                xanchor='left',
+                len=0.6,
+                thickness=12,
+            )
+        )
         st.plotly_chart(fig_map_real, use_container_width=True)
         
     except Exception as e:
