@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit)](https://websites.fraunhofer.de/global-wacc/)
+<img width="191" height="20" alt="image" src="https://github.com/user-attachments/assets/28e51b31-5ecc-4a82-807b-4668bba0cfa8" />
+
 
 An interactive web application that calculates country-specific **Weighted Average Cost of Capital (WACC)** values for green Power-to-X (PtX) projects and energy system modelling. Country risk premiums and beta factors are sourced live from Aswath Damodaran's publicly available datasets.
 
