@@ -1055,7 +1055,8 @@ with tab4:
     st.subheader("Sources")
     st.markdown("""
     **WACC methodology:**
-    - Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
+    - Koller, T.; Goedhart, M.; Wessels, D. (2020). *Valuation*. McKinsey & Company. 7th Edition.
+    - Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.   
     - Reul, J., Mpinga, L., Graul, H., et al. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation.
       [Link](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 
