@@ -25,8 +25,7 @@ from scripts.country_waccs import (
 
 # Configure the page
 
-# Fraunhofer IEE color palette
-IEE_COLORS = [
+COLORS = [
     "#005b7f", "#008598", "#179c7d", "#39c1cd", "#4CC2A6",
     "#669db2", "#a6bbc8", "#b2d235", "#C2D05C", "#face61",
     "#fce356", "#fdb913", "#f58220", "#d6a67c", "#f08591",
@@ -34,8 +33,7 @@ IEE_COLORS = [
     "#454545", "#C0C0C0", "#d3c7ae",
 ]
 
-# Diverging color scale: IEE teal → neutral → IEE magenta (low WACC = good, high = risky)
-IEE_DIVERGING = [
+DIVERGING = [
     [0.0, "#179c7d"],
     [0.15, "#4CC2A6"],
     [0.3, "#39c1cd"],
@@ -46,8 +44,7 @@ IEE_DIVERGING = [
     [1.0, "#7c154d"],
 ]
 
-# Sequential color scale for single-direction metrics
-IEE_SEQUENTIAL = [
+SEQUENTIAL = [
     [0.0, "#005b7f"],
     [0.25, "#008598"],
     [0.5, "#39c1cd"],
@@ -60,113 +57,24 @@ st.set_page_config(
     layout="wide"
 )
 
-# Override Streamlit's default red accent with IEE muted blue-grey
 st.markdown("""
 <style>
-    /* ── Global accent override ── */
-    :root {
-        --primary-color: #a6bbc8 !important;
-    }
-
-    /* ── Slider track (filled portion) ── */
-    .stSlider [data-baseweb="slider"] [role="slider"] {
-        background-color: #005b7f !important;
-    }
-    .stSlider [data-baseweb="slider"] div[data-testid="stTickBar"] ~ div div {
-        background-color: #a6bbc8 !important;
-    }
-    /* Slider thumb */
-    .stSlider [data-baseweb="slider"] [role="slider"],
-    .stSlider [data-baseweb="slider"] div[role="slider"] {
-        background: #005b7f !important;
-        border-color: #005b7f !important;
-    }
-    /* Slider active track */
-    .stSlider div[data-baseweb="slider"] > div:first-child > div {
-        background: #a6bbc8 !important;
-    }
-    .stSlider div[data-baseweb="slider"] > div:first-child > div > div {
-        background: #005b7f !important;
-    }
-
-    /* ── Radio buttons ── */
-    .stRadio [role="radiogroup"] label div[data-testid="stMarkdownContainer"] {
-        color: inherit;
-    }
-    .stRadio [role="radio"][aria-checked="true"] > div:first-child {
-        background-color: #a6bbc8 !important;
-        border-color: #a6bbc8 !important;
-    }
-    /* BaseWeb radio inner dot */
-    div[data-baseweb="radio"] input:checked + div {
-        background-color: #a6bbc8 !important;
-        border-color: #a6bbc8 !important;
-    }
-    div[data-baseweb="radio"] input:checked + div div {
-        background-color: #005b7f !important;
-    }
-
-    /* ── Checkboxes ── */
-    .stCheckbox input:checked + div,
-    .stCheckbox [data-testid="stCheckbox"] input:checked + div,
-    div[data-baseweb="checkbox"] input:checked + div {
-        background-color: #a6bbc8 !important;
-        border-color: #a6bbc8 !important;
-    }
-
-    /* ── Select / multiselect ── */
-    div[data-baseweb="select"] > div:focus-within {
-        border-color: #a6bbc8 !important;
-    }
+    /* ── Multiselect tags ── */
     .stMultiSelect [data-baseweb="tag"] {
         background-color: #a6bbc8 !important;
-    }
-
-    /* ── Buttons ── */
-    button[kind="primary"],
-    .stDownloadButton button {
-        background-color: #a6bbc8 !important;
-        border-color: #a6bbc8 !important;
         color: #1c3f52 !important;
     }
-    button[kind="primary"]:hover,
+
+    /* ── Download button hover ── */
     .stDownloadButton button:hover {
-        background-color: #005b7f !important;
-        border-color: #005b7f !important;
+        background-color: #008598 !important;
+        border-color: #008598 !important;
         color: white !important;
-    }
-
-    /* ── Tabs ── */
-    .stTabs [data-baseweb="tab-highlight"] {
-        background-color: #a6bbc8 !important;
-    }
-    .stTabs [aria-selected="true"] {
-        color: #005b7f !important;
-    }
-
-    /* ── Spinners / progress ── */
-    .stSpinner > div > div {
-        border-top-color: #a6bbc8 !important;
     }
 
     /* ── Links ── */
     a { color: #005b7f !important; }
     a:hover { color: #008598 !important; }
-
-    /* ── Text inputs focus ring ── */
-    .stTextInput input:focus,
-    .stNumberInput input:focus,
-    .stTextArea textarea:focus {
-        border-color: #a6bbc8 !important;
-        box-shadow: 0 0 0 1px #a6bbc8 !important;
-    }
-
-    /* ── Toggle / switch ── */
-    .stToggle input:checked + div {
-        background-color: #a6bbc8 !important;
-    }
-
-    /* ── Info/success boxes keep their own styling ── */
 </style>
 """, unsafe_allow_html=True)
 
@@ -500,14 +408,14 @@ with tab1:
                 title='Real WACC by Selected Countries',
                 labels={'wacc_real': 'Real WACC (%)', 'country_name': 'Country'},
                 color='wacc_real',
-                color_continuous_scale=IEE_DIVERGING,
+                color_continuous_scale=DIVERGING,
                 orientation='h'
             )
             fig_real_wacc.update_layout(showlegend=False, margin=dict(t=50))
             fig_real_wacc.update_traces(texttemplate='%{x:.2%}', textposition='outside')
-            st.plotly_chart(fig_real_wacc, use_container_width=True)
+            st.plotly_chart(fig_real_wacc, width='stretch')
 
-            if show_regional_charts:
+            if not show_regional_charts:
                 col1, col2 = st.columns(2)
                 with col1:
                     fig_components = go.Figure()
@@ -530,7 +438,7 @@ with tab1:
                         yaxis_title='Weighted Cost (%)',
                         xaxis_tickangle=-45
                     )
-                    st.plotly_chart(fig_components, use_container_width=True)
+                    st.plotly_chart(fig_components, width='stretch')
                 with col2:
                     first_country = selected_data.iloc[0]
                     components_data = {
@@ -548,10 +456,10 @@ with tab1:
                         y='Value (%)',
                         title=f'WACC Breakdown: {first_country["country_name"]}',
                         color='Value (%)',
-                        color_continuous_scale=IEE_DIVERGING
+                        color_continuous_scale=DIVERGING
                     )
                     fig_breakdown.update_layout(xaxis_tickangle=-45)
-                    st.plotly_chart(fig_breakdown, use_container_width=True)
+                    st.plotly_chart(fig_breakdown, width='stretch')
         else:
             st.info("Please select countries in the sidebar.")
 
@@ -568,7 +476,7 @@ with tab1:
                 x='wacc_real',
                 y='country_name',
                 color='wacc_real',
-                color_continuous_scale=IEE_DIVERGING,
+                color_continuous_scale=DIVERGING,
                 title=f'Real WACC by Country (Top {top_n})',
                 labels={'wacc_real': 'Real WACC (%)', 'country_name': 'Country'},
                 height=500,
@@ -576,7 +484,7 @@ with tab1:
             )
             fig_wacc_real.update_layout(showlegend=False, margin=dict(t=50))
             fig_wacc_real.update_traces(texttemplate='%{x:.2%}', textposition='outside')
-            st.plotly_chart(fig_wacc_real, use_container_width=True)
+            st.plotly_chart(fig_wacc_real, width='stretch')
         with col2:
             fig_hist_real = px.histogram(
                 wacc_results,
@@ -586,7 +494,7 @@ with tab1:
                 labels={'wacc_real': 'Real WACC (%)', 'count': 'Number of Countries'}
             )
             fig_hist_real.update_layout(showlegend=False)
-            st.plotly_chart(fig_hist_real, use_container_width=True)
+            st.plotly_chart(fig_hist_real, width='stretch')
 
         st.subheader("Detailed Country Comparison")
         display_cols = ['country_name', 'wacc_real', 'country_risk_premium', 'tax_rate', 'cost_of_equity', 'cost_of_debt']
@@ -597,10 +505,10 @@ with tab1:
         for col in pct_cols:
             if col in display_data.columns:
                 display_data[col] = display_data[col].apply(lambda x: f"{x:.3%}")
-        st.dataframe(display_data, use_container_width=True)
+        st.dataframe(display_data, width='stretch')
 
     else:  # Top N Lowest WACC
-        if show_lowest_section:
+        if not show_lowest_section:
             lowest_countries_real = wacc_results.nsmallest(lowest_n, 'wacc_real')
             lowest_countries_real = lowest_countries_real.sort_values('wacc_real', ascending=False)
 
@@ -613,7 +521,7 @@ with tab1:
                     x='wacc_real',
                     y='country_name',
                     color='wacc_real',
-                    color_continuous_scale=IEE_DIVERGING,
+                    color_continuous_scale=DIVERGING,
                     title=f'Countries with Lowest Real WACC (Top {lowest_n})',
                     labels={'wacc_real': 'Real WACC (%)', 'country_name': 'Country'},
                     height=500,
@@ -621,7 +529,7 @@ with tab1:
                 )
                 fig_lowest_real.update_layout(showlegend=False, margin=dict(t=50))
                 fig_lowest_real.update_traces(texttemplate='%{x:.2%}', textposition='outside')
-                st.plotly_chart(fig_lowest_real, use_container_width=True)
+                st.plotly_chart(fig_lowest_real, width='stretch')
             with col2:
                 st.metric("Average Real WACC (Lowest)", f"{lowest_countries_real['wacc_real'].mean():.2%}")
                 st.metric("Lowest Real WACC Country", lowest_countries_real.iloc[0]['country_name'])
@@ -641,9 +549,9 @@ with tab1:
             for col in pct_cols:
                 if col in display_data_lowest.columns:
                     display_data_lowest[col] = display_data_lowest[col].apply(lambda x: f"{x:.3%}")
-            st.dataframe(display_data_lowest, use_container_width=True)
+            st.dataframe(display_data_lowest, width='stretch')
         else:
-            st.info("Lowest WACC countries section is hidden. Enable **Lowest WACC countries** in Display Options in the sidebar.")
+            st.info("Lowest WACC countries section is hidden. Uncheck **Lowest WACC countries** in Display Options in the sidebar.")
 
 
 with tab2:
@@ -660,7 +568,7 @@ with tab2:
             color='wacc_real',
             hover_name='country_name',
             hover_data={'wacc_real': ':.3%', 'country_risk_premium': ':.3%'},
-            color_continuous_scale=IEE_DIVERGING,
+            color_continuous_scale=DIVERGING,
             title='Real WACC by Country - World Map',
             labels={'wacc_real': 'Real WACC (%)'}
         )
@@ -678,17 +586,17 @@ with tab2:
                 thickness=12,
             )
         )
-        st.plotly_chart(fig_map_real, use_container_width=True)
+        st.plotly_chart(fig_map_real, width='stretch')
         
     except Exception as e:
         st.error(f"Error creating map visualization: {e}")
         st.info("Geographic visualization requires proper country codes.")
     
     # Regional Real WACC Analysis
-    if show_regional_charts:
+    if not show_regional_charts:
         st.subheader("Regional Real WACC Analysis")
     
-    if show_regional_charts and 'un_region' in wacc_results.columns:
+    if not show_regional_charts and 'un_region' in wacc_results.columns:
         # Regional comparison with real WACC
         regional_wacc = wacc_results.groupby('un_region').agg({
             'wacc_real': ['mean', 'std'],
@@ -708,13 +616,13 @@ with tab2:
             title='Average Real WACC by Region',
             labels={'WACC_Real_Mean': 'Average Real WACC (%)', 'un_region': 'Region'},
             color='WACC_Real_Mean',
-            color_continuous_scale=IEE_DIVERGING
+            color_continuous_scale=DIVERGING
         )
         fig_regional_real.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig_regional_real, use_container_width=True)
+        st.plotly_chart(fig_regional_real, width='stretch')
     
     # Regional bubble chart
-    if show_regional_charts and 'un_region' in wacc_results.columns:
+    if not show_regional_charts and 'un_region' in wacc_results.columns:
         fig_bubble = px.scatter(
             wacc_results,
             x='country_risk_premium',
@@ -722,7 +630,7 @@ with tab2:
             size='tax_rate',
             color='un_region',
             hover_name='country_name',
-            color_discrete_sequence=IEE_COLORS,
+            color_discrete_sequence=COLORS,
             title='Real WACC vs Country Risk Premium',
             labels={
                 'country_risk_premium': 'Country Risk Premium (%)',
@@ -730,9 +638,9 @@ with tab2:
                 'tax_rate': 'Tax Rate (%)'
             }
         )
-        st.plotly_chart(fig_bubble, use_container_width=True)
+        st.plotly_chart(fig_bubble, width='stretch')
 
-    if show_advanced:
+    if not show_advanced:
         with st.expander("Statistical Analysis", expanded=False):
             col1, col2 = st.columns(2)
             with col1:
@@ -741,9 +649,9 @@ with tab2:
                 fig_corr = px.imshow(
                     corr_data,
                     title='Real WACC Components Correlation Matrix',
-                    color_continuous_scale=IEE_DIVERGING
+                    color_continuous_scale=DIVERGING
                 )
-                st.plotly_chart(fig_corr, use_container_width=True)
+                st.plotly_chart(fig_corr, width='stretch')
             with col2:
                 st.subheader("Risk-Return Analysis")
                 fig_scatter_real = px.scatter(
@@ -752,20 +660,20 @@ with tab2:
                     y='wacc_real',
                     color='un_region' if 'un_region' in wacc_results.columns else None,
                     hover_name='country_name',
-                    color_discrete_sequence=IEE_COLORS,
+                    color_discrete_sequence=COLORS,
                     title='Real WACC vs Country Risk',
                     labels={
                         'country_risk_premium': 'Country Risk Premium (%)',
                         'wacc_real': 'Real WACC (%)'
                     }
                 )
-                st.plotly_chart(fig_scatter_real, use_container_width=True)
+                st.plotly_chart(fig_scatter_real, width='stretch')
 
 with tab3:
     st.header("Real WACC Sensitivity Analysis")
     
-    if not show_sensitivity:
-        st.info("Sensitivity analysis is hidden. Enable **Sensitivity analysis** in Display Options in the sidebar.")
+    if show_sensitivity:
+        st.info("Sensitivity analysis is hidden. Uncheck **Sensitivity analysis** in Display Options in the sidebar.")
     elif len(selected_countries) > 0:
         with st.spinner("Calculating sensitivity analysis..."):
             sensitivity_data = create_sensitivity_analysis(params, country_data, selected_countries)
@@ -797,7 +705,7 @@ with tab3:
                 color='country_name',
                 facet_col='parameter',
                 facet_col_wrap=2,
-                color_discrete_sequence=IEE_COLORS,
+                color_discrete_sequence=COLORS,
                 title='Real WACC Sensitivity to Parameter Changes',
                 labels={'wacc_real': 'Real WACC (%)', 'parameter_value': 'Parameter Value'},
                 height=600
@@ -818,7 +726,7 @@ with tab3:
                                                                                       .replace("beta", "Beta Factor")
                                                                                       .replace("erp", "Equity Risk Premium")
                                                                                       .replace("equity_ratio", "Equity Ratio")))
-            st.plotly_chart(fig_sensitivity_real, use_container_width=True)
+            st.plotly_chart(fig_sensitivity_real, width='stretch')
             
             # Two-column layout for detailed analysis
             col1, col2 = st.columns(2)
@@ -867,14 +775,14 @@ with tab3:
                         title=f'Parameter Impact on Real WACC',
                         labels={'impact_range': 'Real WACC Range (%)', 'parameter': 'Parameter'},
                         color='relative_impact',
-                        color_continuous_scale=IEE_SEQUENTIAL,
+                        color_continuous_scale=SEQUENTIAL,
                         height=400
                     )
                     fig_tornado.update_layout(
                         margin=dict(t=50),
                         coloraxis_colorbar=dict(title="Relative Impact (%)")
                     )
-                    st.plotly_chart(fig_tornado, use_container_width=True)
+                    st.plotly_chart(fig_tornado, width='stretch')
                     
                     # Summary table
                     st.subheader("Impact Summary")
@@ -882,7 +790,7 @@ with tab3:
                     summary_df['impact_range'] = summary_df['impact_range'].apply(lambda x: f"{x:.3%}")
                     summary_df['relative_impact'] = summary_df['relative_impact'].apply(lambda x: f"{x:.1f}%")
                     summary_df.columns = ['Parameter', 'Real WACC Range', 'Relative Impact']
-                    st.dataframe(summary_df, use_container_width=True, hide_index=True)
+                    st.dataframe(summary_df, width='stretch', hide_index=True)
             
             with col2:
                 # Parameter value vs WACC scatter for selected country
@@ -930,7 +838,7 @@ with tab3:
                     )
                     
                     fig_detailed.update_layout(margin=dict(t=50))
-                    st.plotly_chart(fig_detailed, use_container_width=True)
+                    st.plotly_chart(fig_detailed, width='stretch')
                     
                     # Show parameter statistics
                     param_min = detailed_data['parameter_value'].min()
@@ -1009,11 +917,11 @@ with tab3:
                         'y': param_labels[param2_name],
                         'color': 'WACC (%)'
                     },
-                    color_continuous_scale=IEE_DIVERGING,
+                    color_continuous_scale=DIVERGING,
                     height=400
                 )
                 fig_heatmap.update_layout(margin=dict(t=50))
-                st.plotly_chart(fig_heatmap, use_container_width=True)
+                st.plotly_chart(fig_heatmap, width='stretch')
                 
                 st.info(f"""
                 **Key Insights**: 
@@ -1024,10 +932,10 @@ with tab3:
                 """)
         else:
             st.warning("Could not generate sensitivity analysis data.")
-    elif show_sensitivity:
+    elif not show_sensitivity:
         st.info("Please select countries in the sidebar to perform sensitivity analysis.")
 
-    if show_advanced:
+    if not show_advanced:
         with st.expander("Scenario Analysis", expanded=False):
             scenarios = {
                 'Conservative': {'r_free': r_free * 0.7, 'erp': erp * 0.8, 'beta': beta * 0.9},
@@ -1052,7 +960,7 @@ with tab3:
 
             if scenario_results:
                 scenario_df = pd.DataFrame(scenario_results)
-                st.dataframe(scenario_df, use_container_width=True)
+                st.dataframe(scenario_df, width='stretch')
 
                 scenario_plot_data = []
                 for result in scenario_results:
@@ -1072,10 +980,10 @@ with tab3:
                     title='Scenario Analysis: Average Real WACC Comparison',
                     labels={'Average': 'Average Real WACC (%)'},
                     color='Average',
-                    color_continuous_scale=IEE_DIVERGING
+                    color_continuous_scale=DIVERGING
                 )
 
-                st.plotly_chart(fig_scenario, use_container_width=True)
+                st.plotly_chart(fig_scenario, width='stretch')
 
 # Info tab — methodology, formulas, and sources
 with tab4:
@@ -1147,7 +1055,8 @@ with tab4:
     st.subheader("Sources")
     st.markdown("""
     **WACC methodology:**
-    - Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
+    - Koller, T.; Goedhart, M.; Wessels, D. (2020). *Valuation*. McKinsey & Company. 7th Edition.
+    - Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.   
     - Reul, J., Mpinga, L., Graul, H., et al. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation.
       [Link](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 
@@ -1166,10 +1075,19 @@ with tab4:
       [Link](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html)
     """)
 
+    st.subheader("Acknowledgements")
+    st.markdown("""
+    We thank **Julian Reul** (H2Global Foundation) for his valuable methodological input
+    and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
+
+    This tool was developed within the projects **H2Global meets Africa** (FKZ: 03SF0703B)
+    and **HySecunda** (FKZ: 03SF0734), funded by the German Federal Ministry of Research,
+    Technology, and Space (BMFTR).
+    """)
+
     st.subheader("License")
     st.markdown("""
-    This tool and its results are licensed under
-    [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+    This project code is licensed under the [MIT License](https://github.com/ljansen-iee/global-wacc/blob/main/LICENSE). Results are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Different licenses and terms of use apply to the input datasets.
     """)
 
 # Footer
@@ -1243,7 +1161,7 @@ csv_with_metadata = create_csv_with_metadata(wacc_results, params)
 # Legal footer links
 col1, col2, col3 = st.columns([3, 3, 3])
 with col1:
-    st.caption("Global WACC Calculator for Green PtX and Energy System Modelling | Licensed under CC BY 4.0")
+    st.caption("Global WACC Calculator for Green PtX and Energy System Modelling.  Licensed under CC BY 4.0")
     st.download_button(
     "Download WACC Results (with metadata)",
     csv_with_metadata,
@@ -1251,15 +1169,23 @@ with col1:
     "text/csv",
     key='download-wacc-csv'
     )
-with col2:
-    st.caption("Lukas Jansen, 2025, Fraunhofer IEE, https://github.com/ljansen-iee/global-wacc.")
     st.caption("Sources: "
     "Damodaran (2026), [Country Risk Premiums](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html) "
     "& [Betas by Sector](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html); "
     "Damodaran (2023), [Country Risk](https://doi.org/10.2139/ssrn.4509578) "
     "& [ERP](https://doi.org/10.2139/ssrn.4398884); "
-    "Brealey, Myers & Allen (2020), Principles of Corporate Finance; "
+    "Koller, T.; Goedhart, M.; Wessels, D. (2020). *Valuation*. McKinsey & Company. 7th Edition.; "
     "Reul et al. (2025), [Renewable Ammonia: Kenya's Business Case](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)")
+with col2:
+    st.caption("Lukas Jansen, 2026, Fraunhofer IEE, https://github.com/ljansen-iee/global-wacc.")
+    st.caption("""
+    We thank Julian Reul (H2Global Foundation) for his valuable methodological input
+    and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
+
+    This tool was developed within the projects **H2Global meets Africa** (FKZ: 03SF0703B)
+    and **HySecunda** (FKZ: 03SF0734), funded by the German Federal Ministry of Research,
+    Technology, and Space (BMFTR).
+    """)
 with col3:
     st.markdown("[Imprint](https://www.iee.fraunhofer.de/en/publishing-notes.html)")
     st.markdown("[Data Protection](https://www.iee.fraunhofer.de/en/data_protection.html)")

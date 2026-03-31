@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit)](https://websites.fraunhofer.de/global-wacc/)
+[![DOI](https://zenodo.org/badge/1184342674.svg)](https://doi.org/10.5281/zenodo.19355784)
+
 
 An interactive web application that calculates country-specific **Weighted Average Cost of Capital (WACC)** values for green Power-to-X (PtX) projects and energy system modelling. Country risk premiums and beta factors are sourced live from Aswath Damodaran's publicly available datasets.
 
@@ -81,14 +83,22 @@ Set `SKIP_DOWNLOAD = False` in `scripts/country_waccs.py`, or set `RECREATE_COUN
 
 ## Literature and Data Sources
 
-- Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
+- Koller, T.; Goedhart, M.; Wessels, D. (2020). *Valuation*. McKinsey & Company. 7th Edition.
 - Reul, J.; Mpinga, L.; Graul, H.; Häckner, B.; Fetköter, J.; Zink, C.; Nafula, M.; Kosgei, D.; Banda, S. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation. [H2Global library](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 - Damodaran, A. (2026). *Country Default Spreads and Risk Premiums.* NYU Stern. [ctryprem.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html)
 - Damodaran, A. (2026). *Betas by Sector (US).* NYU Stern. [Betas.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html)
 - Damodaran, A. (2023). *Country Risk: Determinants, Measures and Implications.* [DOI 10.2139/ssrn.4509578](https://doi.org/10.2139/ssrn.4509578)
 - Damodaran, A. (2023). *Equity Risk Premiums (ERP).* [DOI 10.2139/ssrn.4398884](https://doi.org/10.2139/ssrn.4398884)
+- Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
 
 Full BibTeX references are available in [references.bib](references.bib).
+
+---
+
+## Acknowledgements
+
+We thank **[Julian Reul](https://www.linkedin.com/in/julian-reul/)** (H2Global Foundation) for his valuable methodological input and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
+This tool was developed within the projects **H2Global meets Africa** (FKZ: 03SF0703B) and **HySecunda** (FKZ: 03SF0734), funded by the German Federal Ministry of Research, Technology, and Space (BMFTR).  
 
 ---
 
@@ -98,4 +108,4 @@ This project code is licensed under the [MIT License](LICENSE).
 Results are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 Different licenses and terms of use apply to the input datasets. By downloading and using the data provided, the user of the tool agrees to the licenses specified by the original sources (see above).
 
-**Author:** Lukas Jansen, Fraunhofer IEE — [lukas.jansen@iee.fraunhofer.de](mailto:lukas.jansen@iee.fraunhofer.de)
+**Author:** Lukas Jansen, Fraunhofer IEE, [lukas.jansen@iee.fraunhofer.de](mailto:lukas.jansen@iee.fraunhofer.de)

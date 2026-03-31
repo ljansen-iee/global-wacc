@@ -1,0 +1,101 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "Global WACC Calculator for Green PtX and Energy System Modelling"
+abstract: >
+  An interactive web application that calculates country-specific Weighted
+  Average Cost of Capital (WACC) values for green Power-to-X (PtX) projects
+  and energy system modelling. Country risk premiums and beta factors are
+  sourced from Aswath Damodaran's publicly available datasets. The tool
+  supports interactive parameter adjustment, real and nominal WACC output,
+  country-specific beta re-levering (Hamada's equation), geographic
+  visualisation, sensitivity analysis, and CSV export with embedded metadata.
+authors:
+  - family-names: Jansen
+    given-names: Lukas
+    email: lukas.jansen@iee.fraunhofer.de
+    affiliation: "Fraunhofer Institute for Energy Economics and Energy System Technology (IEE)"
+    orcid: "https://orcid.org/0000-0002-8022-6792"
+repository-code: "https://github.com/ljansen-iee/global-wacc"
+url: "https://websites.fraunhofer.de/global-wacc/"
+license: MIT
+version: "0.1.0"
+date-released: "2026-03-31"
+keywords:
+  - WACC
+  - weighted average cost of capital
+  - green hydrogen
+  - Power-to-X
+  - PtX
+  - country risk premium
+  - energy system modelling
+  - capital cost
+  - emerging markets
+  - Damodaran
+  - CAPM
+references:
+  - type: article
+    title: "Country Risk: Determinants, Measures and Implications -- The 2023 Edition"
+    authors:
+      - family-names: Damodaran
+        given-names: Aswath
+    year: 2023
+    doi: 10.2139/ssrn.4509578
+  - type: article
+    title: "Equity Risk Premiums (ERP): Determinants, Estimation and Implications -- The 2023 Edition"
+    authors:
+      - family-names: Damodaran
+        given-names: Aswath
+    year: 2023
+    doi: 10.2139/ssrn.4398884
+  - type: book
+    title: "Principles of Corporate Finance"
+    authors:
+      - family-names: Brealey
+        given-names: "Richard A."
+      - family-names: Myers
+        given-names: "Stewart C."
+      - family-names: Allen
+        given-names: Franklin
+    year: 2020
+    edition: "13th"
+    publisher:
+      name: "McGraw-Hill Education"
+  - type: book
+    title: "Valuation: Measuring and Managing the Value of Companies"
+    authors:
+      - family-names: Koller
+        given-names: Tim
+      - family-names: Goedhart
+        given-names: Marc
+      - family-names: Wessels
+        given-names: David
+    year: 2020
+    edition: "7th"
+    publisher:
+      name: Wiley
+    isbn: "978-1-119-61088-5"
+  - type: report
+    title: "Renewable Ammonia: Kenya's Business Case"
+    authors:
+      - family-names: Reul
+        given-names: Julian
+      - family-names: Mpinga
+        given-names: L.
+      - family-names: Graul
+        given-names: H.
+      - family-names: "Häckner"
+        given-names: B.
+      - family-names: "Fetköter"
+        given-names: J.
+      - family-names: Zink
+        given-names: C.
+      - family-names: Nafula
+        given-names: M.
+      - family-names: Kosgei
+        given-names: D.
+      - family-names: Banda
+        given-names: S.
+    year: 2025
+    institution:
+      name: "H2Global Foundation"
+    url: "https://h2-global.org/library/renewable-ammonia-kenyas-business-case/"
