@@ -1169,13 +1169,13 @@ with col1:
     key='download-wacc-csv'
     )
 with col2:
-    st.caption("Lukas Jansen, 2025, Fraunhofer IEE, https://github.com/ljansen-iee/global-wacc.")
+    st.caption("Lukas Jansen, 2026, Fraunhofer IEE, https://github.com/ljansen-iee/global-wacc.")
     st.caption("Sources: "
     "Damodaran (2026), [Country Risk Premiums](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html) "
     "& [Betas by Sector](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html); "
     "Damodaran (2023), [Country Risk](https://doi.org/10.2139/ssrn.4509578) "
     "& [ERP](https://doi.org/10.2139/ssrn.4398884); "
-    "Brealey, Myers & Allen (2020), Principles of Corporate Finance; "
+    "Koller, T.; Goedhart, M.; Wessels, D. (2020). *Valuation*. McKinsey & Company. 7th Edition.; "
     "Reul et al. (2025), [Renewable Ammonia: Kenya's Business Case](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)")
 with col3:
     st.markdown("[Imprint](https://www.iee.fraunhofer.de/en/publishing-notes.html)")
