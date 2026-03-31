@@ -81,7 +81,7 @@ Set `SKIP_DOWNLOAD = False` in `scripts/country_waccs.py`, or set `RECREATE_COUN
 
 ## Literature and Data Sources
 
-- Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
+- Koller, T.; Goedhart, M.; Wessels, D. (2020). *Valuation*. McKinsey & Company. 7th Edition.
 - Reul, J.; Mpinga, L.; Graul, H.; Häckner, B.; Fetköter, J.; Zink, C.; Nafula, M.; Kosgei, D.; Banda, S. (2025). *Renewable Ammonia: Kenya's Business Case.* H2Global Foundation. [H2Global library](https://h2-global.org/library/renewable-ammonia-kenyas-business-case/)
 - Damodaran, A. (2026). *Country Default Spreads and Risk Premiums.* NYU Stern. [ctryprem.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html)
 - Damodaran, A. (2026). *Betas by Sector (US).* NYU Stern. [Betas.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html)
@@ -89,6 +89,13 @@ Set `SKIP_DOWNLOAD = False` in `scripts/country_waccs.py`, or set `RECREATE_COUN
 - Damodaran, A. (2023). *Equity Risk Premiums (ERP).* [DOI 10.2139/ssrn.4398884](https://doi.org/10.2139/ssrn.4398884)
 
 Full BibTeX references are available in [references.bib](references.bib).
+
+---
+
+## Acknowledgements
+
+We thank **Julian Reul** (H2Global Foundation) for his valuable methodological input and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
+This tool was developed within the projects **H2Global meets Africa** (FKZ: 03SF0703B) and **HySecunda** (FKZ: 03SF0734), funded by the German Federal Ministry of Research, Technology, and Space (BMFTR).  
 
 ---
 

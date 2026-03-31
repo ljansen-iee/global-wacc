@@ -163,7 +163,7 @@ showPyplotGlobalUse = true
 
 [theme]
 base = "light"
-primaryColor = "#1c3f52"
+primaryColor = "#005b7f"
 backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f0f2f6"
 textColor = "#1c3f52"
