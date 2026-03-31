@@ -1179,7 +1179,7 @@ with col1:
 with col2:
     st.caption("Lukas Jansen, 2026, Fraunhofer IEE, https://github.com/ljansen-iee/global-wacc.")
     st.caption("""
-    We thank Julian Reul (H2Global Foundation) for his valuable methodological input
+    Credits to [Julian Reul](https://www.linkedin.com/in/julian-reul/) (H2Global Foundation) for his valuable methodological input
     and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
 
     This tool was developed within the projects **H2Global meets Africa** (FKZ: 03SF0703B)
