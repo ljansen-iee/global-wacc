@@ -87,6 +87,7 @@ Set `SKIP_DOWNLOAD = False` in `scripts/country_waccs.py`, or set `RECREATE_COUN
 - Damodaran, A. (2026). *Betas by Sector (US).* NYU Stern. [Betas.html](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html)
 - Damodaran, A. (2023). *Country Risk: Determinants, Measures and Implications.* [DOI 10.2139/ssrn.4509578](https://doi.org/10.2139/ssrn.4509578)
 - Damodaran, A. (2023). *Equity Risk Premiums (ERP).* [DOI 10.2139/ssrn.4398884](https://doi.org/10.2139/ssrn.4398884)
+- Brealey, R.A., Myers, S.C. & Allen, F. (2020). *Principles of Corporate Finance* (13th ed.). McGraw-Hill Education.
 
 Full BibTeX references are available in [references.bib](references.bib).
 
@@ -94,7 +95,7 @@ Full BibTeX references are available in [references.bib](references.bib).
 
 ## Acknowledgements
 
-We thank **Julian Reul** (H2Global Foundation) for his valuable methodological input and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
+We thank **[Julian Reul](https://www.linkedin.com/in/julian-reul/)** (H2Global Foundation) for his valuable methodological input and discussions on WACC approaches for green hydrogen and PtX projects in emerging markets.
 This tool was developed within the projects **H2Global meets Africa** (FKZ: 03SF0703B) and **HySecunda** (FKZ: 03SF0734), funded by the German Federal Ministry of Research, Technology, and Space (BMFTR).  
 
 ---
@@ -105,4 +106,4 @@ This project code is licensed under the [MIT License](LICENSE).
 Results are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 Different licenses and terms of use apply to the input datasets. By downloading and using the data provided, the user of the tool agrees to the licenses specified by the original sources (see above).
 
-**Author:** Lukas Jansen, Fraunhofer IEE — [lukas.jansen@iee.fraunhofer.de](mailto:lukas.jansen@iee.fraunhofer.de)
+**Author:** Lukas Jansen, Fraunhofer IEE, [lukas.jansen@iee.fraunhofer.de](mailto:lukas.jansen@iee.fraunhofer.de)
