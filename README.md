@@ -73,7 +73,7 @@ streamlit run app.py
 python scripts/country_waccs.py
 ```
 
-Results are saved to `data/wacc_per_country_crp.csv`.
+Results are saved to `results/wacc_per_country_crp.csv`.
 
 ### Re-download source data
 

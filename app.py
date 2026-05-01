@@ -16,11 +16,12 @@ if parent_parts and parent_parts[-1] == "global-wacc":
 
 from scripts.country_waccs import (
     download_country_risk_premium,
-    download_beta_data, 
+    download_beta_data,
     process_country_risk_premium,
     calculate_wacc_per_country,
     convert_wacc_nominal_to_real,
-    calculate_wacc
+    calculate_wacc,
+    WaccParams,
 )
 
 # Configure the page
@@ -129,7 +130,7 @@ def load_and_calculate_wacc(skip_download=True):
         return pd.DataFrame(), False
 
 @st.cache_data
-def calculate_wacc_with_params(country_data, params):
+def calculate_wacc_with_params(country_data, params: WaccParams):
     """Recalculate WACC based on user parameters"""
     if len(country_data) == 0:
         return pd.DataFrame()
@@ -137,18 +138,18 @@ def calculate_wacc_with_params(country_data, params):
     try:
         wacc_results = calculate_wacc_per_country(
             country_data=country_data,
-            r_free=params['r_free'],
-            beta_unleveraged=params['beta'],
-            erp=params['erp'],
-            r_debt=params['r_debt'],
-            equity_ratio=params['equity_ratio'],
-            debt_ratio=params['debt_ratio'],
-            use_country_erp=params['use_country_erp']
+            r_free=params.r_free,
+            beta_unleveraged=params.beta,
+            erp=params.erp,
+            r_debt=params.r_debt,
+            equity_ratio=params.equity_ratio,
+            debt_ratio=params.debt_ratio,
+            use_country_erp=params.use_country_erp,
         )
         
         # Add real WACC
         wacc_results['wacc_real'] = wacc_results['wacc'].apply(
-            lambda nominal_wacc: convert_wacc_nominal_to_real(nominal_wacc, params['inflation_rate'])
+            lambda nominal_wacc: convert_wacc_nominal_to_real(nominal_wacc, params.inflation_rate)
         )
         
         # Add cost of equity and cost of debt components
@@ -182,7 +183,7 @@ def calculate_wacc_with_params(country_data, params):
         st.error(f"Error calculating WACC: {e}")
         return pd.DataFrame()
 
-def create_sensitivity_analysis(base_params, country_data, selected_countries):
+def create_sensitivity_analysis(base_params: WaccParams, country_data, selected_countries):
     """Generate sensitivity analysis data for selected countries"""
     
     if len(selected_countries) == 0:
@@ -190,18 +191,20 @@ def create_sensitivity_analysis(base_params, country_data, selected_countries):
     
     # Parameters to vary and their ranges
     sensitivity_params = {
-        'r_free': np.linspace(base_params['r_free'] * 0.5, base_params['r_free'] * 1.5, 11),
-        'beta': np.linspace(base_params['beta'] * 0.7, base_params['beta'] * 1.3, 11),
-        'erp': np.linspace(base_params['erp'] * 0.7, base_params['erp'] * 1.3, 11),
+        'r_free': np.linspace(base_params.r_free * 0.5, base_params.r_free * 1.5, 11),
+        'beta': np.linspace(base_params.beta * 0.7, base_params.beta * 1.3, 11),
+        'erp': np.linspace(base_params.erp * 0.7, base_params.erp * 1.3, 11),
         'equity_ratio': np.linspace(0.2, 0.8, 11)
     }
     
     sensitivity_results = []
+    # Use a plain dict for per-iteration mutations — WaccParams validates the baseline
+    base_dict = base_params.model_dump()
     
     for param_name, param_values in sensitivity_params.items():
         for param_value in param_values:
             # Create modified parameters
-            modified_params = base_params.copy()
+            modified_params = base_dict.copy()
             modified_params[param_name] = param_value
             
             # Calculate debt ratio if equity ratio changed
@@ -214,7 +217,7 @@ def create_sensitivity_analysis(base_params, country_data, selected_countries):
                     country_row = country_data.loc[country_code]
                     
                     country_crp = country_row['country_risk_premium']
-                    country_tax = country_row['tax_rate'] * 0.5
+                    country_tax = country_row['tax_rate']
                     
                     # Use country-specific ERP if option is enabled
                     if modified_params['use_country_erp'] and pd.notna(country_row['equity_risk_premium']):
@@ -331,19 +334,19 @@ with st.sidebar:
     show_sensitivity = st.checkbox("Sensitivity analysis", value=True, help="Full sensitivity analysis with tornado chart and heatmap")
     show_advanced = st.checkbox("Advanced analysis", value=True, help="Statistical analysis in Geographic tab; scenario analysis in Sensitivity tab")
 
-# Prepare parameters dictionary
-params = {
-    'r_free': r_free,
-    'beta': beta,
-    'erp': erp,
-    'swap_rate': swap_rate,
-    'debt_spread': debt_spread,
-    'r_debt': r_debt,
-    'equity_ratio': equity_ratio,
-    'debt_ratio': debt_ratio,
-    'inflation_rate': inflation_rate,
-    'use_country_erp': use_country_erp
-}
+# Prepare parameters
+params = WaccParams(
+    r_free=r_free,
+    beta=beta,
+    erp=erp,
+    swap_rate=swap_rate,
+    debt_spread=debt_spread,
+    r_debt=r_debt,
+    equity_ratio=equity_ratio,
+    debt_ratio=debt_ratio,
+    inflation_rate=inflation_rate,
+    use_country_erp=use_country_erp,
+)
 
 # Calculate WACC with current parameters
 with st.spinner("Calculating WACC..."):
@@ -866,8 +869,10 @@ with tab3:
                 param2_name = [k for k, v in param_labels.items() if v == top_params[1]['parameter']][0]
                 
                 # Create grid for heatmap
-                param1_values = np.linspace(params[param1_name] * 0.7, params[param1_name] * 1.3, 10)
-                param2_values = np.linspace(params[param2_name] * 0.7, params[param2_name] * 1.3, 10)
+                # Use a plain dict for dynamic key access in the grid loop
+                params_dict = params.model_dump()
+                param1_values = np.linspace(params_dict[param1_name] * 0.7, params_dict[param1_name] * 1.3, 10)
+                param2_values = np.linspace(params_dict[param2_name] * 0.7, params_dict[param2_name] * 1.3, 10)
                 
                 heatmap_data = []
                 for p1_val in param1_values:
@@ -877,7 +882,7 @@ with tab3:
                         country_crp = country_row['country_risk_premium']
                         country_tax = country_row['tax_rate'] * 0.5
                         
-                        modified_params = params.copy()
+                        modified_params = params_dict.copy()
                         modified_params[param1_name] = p1_val
                         modified_params[param2_name] = p2_val
                         
@@ -945,8 +950,7 @@ with tab3:
 
             scenario_results = []
             for scenario_name, scenario_params in scenarios.items():
-                scenario_wacc_params = params.copy()
-                scenario_wacc_params.update(scenario_params)
+                scenario_wacc_params = params.model_copy(update=scenario_params)
 
                 scenario_wacc = calculate_wacc_with_params(country_data, scenario_wacc_params)
                 if len(scenario_wacc) > 0:
@@ -1112,16 +1116,16 @@ def create_csv_with_metadata(wacc_data, params):
         "# License: CC BY 4.0",
         "# Contact: lukas.jansen@iee.fraunhofer.de",
         f"# Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-        f"# Risk-free rate: {params['r_free']:.3%}",
-        f"# Beta factor (unleveraged): {params['beta']:.3f}",
-        f"# Equity risk premium: {params['erp']:.3%}",
-        f"# SWAP rate: {params['swap_rate']:.3%}",
-        f"# Credit margin (debt spread): {params['debt_spread']:.3%}",
-        f"# Cost of debt (r_debt): {params['r_debt']:.3%}",
-        f"# Equity ratio: {params['equity_ratio']:.1%}",
-        f"# Debt ratio: {params['debt_ratio']:.1%}",
-        f"# Inflation rate: {params['inflation_rate']:.3%}",
-        f"# Use country-specific ERP: {params['use_country_erp']}",
+        f"# Risk-free rate: {params.r_free:.3%}",
+        f"# Beta factor (unleveraged): {params.beta:.3f}",
+        f"# Equity risk premium: {params.erp:.3%}",
+        f"# SWAP rate: {params.swap_rate:.3%}",
+        f"# Credit margin (debt spread): {params.debt_spread:.3%}",
+        f"# Cost of debt (r_debt): {params.r_debt:.3%}",
+        f"# Equity ratio: {params.equity_ratio:.1%}",
+        f"# Debt ratio: {params.debt_ratio:.1%}",
+        f"# Inflation rate: {params.inflation_rate:.3%}",
+        f"# Use country-specific ERP: {params.use_country_erp}",
         f"# Countries analyzed: {len(wacc_data)}",
         f"# Average real WACC: {wacc_data['wacc_real'].mean():.3%}",
         f"# WACC range: {wacc_data['wacc_real'].min():.3%} - {wacc_data['wacc_real'].max():.3%}",
