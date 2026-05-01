@@ -1,0 +1,32 @@
+name: Scenario WACC
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/country_waccs.py"
+      - "scripts/scenario_waccs.py"
+      - "data/country_risk_premium_raw.csv"
+      - "data/country_converter_map.csv"
+  pull_request:
+    paths:
+      - "scripts/country_waccs.py"
+      - "scripts/scenario_waccs.py"
+      - "data/country_risk_premium_raw.csv"
+      - "data/country_converter_map.csv"
+
+jobs:
+  run-scenarios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pandas==2.3.0 numpy==1.26.4 country-converter==1.2 "pydantic>=2.0"
+
+      - name: Run scenario WACC calculation
+        run: python scripts/scenario_waccs.py
